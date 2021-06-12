@@ -51,6 +51,15 @@ const commands =
             });
             return message.slice(0, -2);
         }
+    },
+    {
+      name : 'rng',
+      usage : '/rng min max',
+      arguments : 2,
+      description : 'Generates a random number between min and max',
+      funct : function(user,msg,args) {
+        return Math.floor(Math.random() * (Math.floor(args[2 - (args.length === 2 ? 1 : 0)]) - (args.length === 2 ? Math.ceil(args[1]) : 1) + 1) + (args.length === 2 ? Math.ceil(args[1]) : 1));
+      }
     }
 ];
 
@@ -58,7 +67,7 @@ const commands =
 function botCommand(user, msg) {
     const index = commands.findIndex(command => "/" + command.name === msg.split(" ")[0]);
     if (index !== -1) {
-        if(msg.split(" ").length === commands[index].arguments) {
+        if(msg.split(" ").length >= commands[index].arguments) {
             return commands[index].funct(user,msg,msg.split(" "));
         }
         else {

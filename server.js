@@ -51,7 +51,7 @@ io.on('connection', socket => {
         io.to(user.roomID).emit('message',formatMessage(user.username,msg));
         if(msg.charAt(0) === '/') {
             msg = botCommand(user,msg);
-            io.to(user.roomID).emit('message',formatMessage(user.username,msg));
+            io.to(user.roomID).emit('message',formatMessage(botName,msg));
         }
 
         
